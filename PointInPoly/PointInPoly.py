@@ -5,27 +5,22 @@ from AngleUtil.AngleUtil import *
 import math
 
 
-class CalcAngle:
-    def __init__(self):
-        pass
-
-    @staticmethod
-    def calc(point_a, point_b):
-        A = MyLatLng(long_lat=point_a)
-        B = MyLatLng(long_lat=point_b)
-        return AngleUtil.get_radius(A, B)
-
-    @staticmethod
-    def calc2(internal_point_1, internal_point_2, point):
-        angle1 = CalcAngle.calc(internal_point_1, internal_point_2)
-        angle1 = CalcAngle.calc(internal_point_1, internal_point_2)
-
 class Poly:
-	def __init__(self, point_list):
-		self.point_list = point_list
+    def __init__(self, point_list):
+        self.point_list = point_list
 
-	def point_in_poly(self, point):
-		pass
+    def point_in_poly(self, point):
+        o_point = MyLatLng(long_lat=point)
+        sum = 0
+        length = len(self.point_list)
+        for index in range(length):
+            i_point_1 = MyLatLng(long_lat=self.point_list[index])
+            if index == length - 1:
+                i_point_2 = MyLatLng(long_lat=self.point_list[0])
+            else:
+                i_point_2 = MyLatLng(long_lat=self.point_list[index+1])
+            sum += AngleUtil.get_3_points_radius(i_point_1, i_point_2, o_point)
+        return (sum - math.pi * 2) < 0.01
 
 
 if __name__ == '__main__':
@@ -85,7 +80,6 @@ CX296    |  292401N1123904E    |
     CX171 = '274501N1141326E'
     CX296 = '292401N1123904E'
     plist = (CX128,CX296,CX15,CX16,CX171,CX170,CX130,CX169,CX168,CX167,CX166,CX165,CX161,CX162,CX163,CX164,CX128)
-    ca = CalcAngle()
     poly = Poly(plist)
-    result = poly.point_in_poly(point)
+    result = poly.point_in_poly('281332N1142106E')
     print result

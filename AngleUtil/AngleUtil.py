@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import math
+import numpy
 Rc = 6378137
 Rj = 6356725
 
@@ -42,13 +43,13 @@ class MyLatLng:
         self.Ed = self.Ec*math.cos(self.m_Rad_la)
 
     def init2(self, long_lat):
-        self.m_LoDeg = int(long_lat[:3])
-        self.m_LoMin = int(long_lat[3:5])
-        self.m_LoSec = int(long_lat[5:7])
+        self.m_L0Deg = int(long_lat[7:10])
+        self.m_LoMin = int(long_lat[10:12])
+        self.m_LoSec = int(long_lat[12:14])
 
-        self.m_LaDeg = int(long_lat[8:10])
-        self.m_LaMin = int(long_lat[10:12])
-        self.m_LaSec = int(long_lat[12:14])
+        self.m_LaDeg = int(long_lat[:2])
+        self.m_LaMin = int(long_lat[2:4])
+        self.m_LaSec = int(long_lat[4:6])
 
         self.m_Longitude = (self.m_LoSec / 60. + self.m_LoMin) / 60. + self.m_LoDeg
         self.m_Latitude = (self.m_LaSec / 60. + self.m_LaMin) / 60. + self.m_LaDeg
@@ -80,6 +81,12 @@ class AngleUtil:
         bwd=(dy/point_a.Ec+point_a.m_Rad_la)*180./math.pi
         return MyLatLng(bjd, bwd)
 
+    @staticmethod
+    def get_str(num):
+        dec = int(num)
+        min = int((num - dec) * 60)
+        sec = int(((num - dec) * 60 - min) * 60)
+        return "%03d%02d%02d\n" % (dec, min, sec)
 
     '''
 	/**
@@ -108,13 +115,34 @@ class AngleUtil:
     def get_radius(point_a, point_b):
         return math.radians(AngleUtil.get_angle(point_a, point_b))
 
+    @staticmethod
+    def get_vector(point_a, point_b):
+        dx = point_b.m_Rad_la*point_b.Ec - point_a.m_Rad_la*point_a.Ec
+        dy = (point_b.m_Rad_lo-point_a.m_Rad_lo)*point_a.Ed
+        dz = (point_b.m_Rad_la-point_a.m_Rad_la)*point_a.Ec
+        return dx, dy, dz
+
+    @staticmethod
+    def get_vector_radius(x_t, y_t):
+        x = numpy.array(list(x_t))
+        y = numpy.array(list(y_t))
+        lx = numpy.sqrt(x.dot(x))
+        ly = numpy.sqrt(y.dot(y))
+        cos_angle = x.dot(y) / (lx * ly)
+        return numpy.arccos(cos_angle)
+
+    @staticmethod
+    def get_3_points_radius(internal_point_1, internal_point_2, point):
+        vector_1 = AngleUtil.get_vector(point, internal_point_1)
+        vector_2 = AngleUtil.get_vector(point, internal_point_2)
+        return AngleUtil.get_vector_radius(vector_1, vector_2)
 
 if __name__ == '__main__':
     A = MyLatLng(113.249648, 23.401553)
     B = MyLatLng(113.246033, 23.403362)
     print AngleUtil.get_angle(A, B)
 
-    A = MyLatLng(long_lat='1131458E232405N')
-    B = MyLatLng(long_lat='1131445E232412N')
+    A = MyLatLng(long_lat='232405N1131458E')
+    B = MyLatLng(long_lat='232412N1131445E')
     print AngleUtil.get_angle(A, B)
     print AngleUtil.get_radius(A, B)
