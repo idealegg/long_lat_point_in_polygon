@@ -3,7 +3,7 @@ import math
 import numpy
 Rc = 6378137
 Rj = 6356725
-
+point_list = []
 
 class MyLatLng:
     def __init__(self, longitude=0, latitude=0, long_lat="", mode=1):

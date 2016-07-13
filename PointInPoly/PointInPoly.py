@@ -2,12 +2,14 @@
 
 # import os
 from AngleUtil.AngleUtil import *
+from DrawCoordinateGraph.DrawCoordinateGraph import *
 import math
 
 
 class Poly:
     def __init__(self, point_list):
         self.point_list = point_list
+        self.coordinate_point_list = []
 
     def point_in_poly(self, point):
         o_point = MyLatLng(long_lat=point)
@@ -20,7 +22,18 @@ class Poly:
             else:
                 i_point_2 = MyLatLng(long_lat=self.point_list[index+1])
             sum += AngleUtil.get_3_points_radius(i_point_1, i_point_2, o_point)
-        return (sum - math.pi * 2) < 0.01
+        return math.fabs(sum - math.pi * 2) < math.pi * 0.5
+
+    def fill_coordinate_point_list(self):
+        original_point = MyLatLng(0,0)
+        for point in self.point_list:
+            point_item = MyLatLng(long_lat=point)
+            self.coordinate_point_list.append(AngleUtil.get_vector(point_item, original_point))
+
+    def draw_graph(self):
+        self.fill_coordinate_point_list()
+        dcg = DrawCoordinateGraph(self.coordinate_point_list, (0,0,0))
+        dcg.draw_graph()
 
 
 if __name__ == '__main__':
@@ -83,3 +96,5 @@ CX296    |  292401N1123904E    |
     poly = Poly(plist)
     result = poly.point_in_poly('281332N1142106E')
     print result
+    poly.draw_graph()
+
