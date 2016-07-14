@@ -43,7 +43,7 @@ class MyLatLng:
         self.Ed = self.Ec*math.cos(self.m_Rad_la)
 
     def init2(self, long_lat):
-        self.m_L0Deg = int(long_lat[7:10])
+        self.m_LoDeg = int(long_lat[7:10])
         self.m_LoMin = int(long_lat[10:12])
         self.m_LoSec = int(long_lat[12:14])
 

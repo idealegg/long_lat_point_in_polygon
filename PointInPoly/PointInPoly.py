@@ -5,14 +5,18 @@ from AngleUtil.AngleUtil import *
 from DrawCoordinateGraph.DrawCoordinateGraph import *
 import math
 
+original_point = MyLatLng(0, 0)
+fixed_parameter = 0.01
+
 
 class Poly:
     def __init__(self, point_list):
         self.point_list = point_list
         self.coordinate_point_list = []
+        self.o_point = None
 
     def point_in_poly(self, point):
-        o_point = MyLatLng(long_lat=point)
+        self.o_point = MyLatLng(long_lat=point)
         sum = 0
         length = len(self.point_list)
         for index in range(length):
@@ -21,18 +25,17 @@ class Poly:
                 i_point_2 = MyLatLng(long_lat=self.point_list[0])
             else:
                 i_point_2 = MyLatLng(long_lat=self.point_list[index+1])
-            sum += AngleUtil.get_3_points_radius(i_point_1, i_point_2, o_point)
-        return math.fabs(sum - math.pi * 2) < math.pi * 0.5
+            sum += AngleUtil.get_3_points_radius(i_point_1, i_point_2, self.o_point)
+        return math.fabs(sum - math.pi * 2) < math.pi * fixed_parameter
 
     def fill_coordinate_point_list(self):
-        original_point = MyLatLng(0,0)
         for point in self.point_list:
             point_item = MyLatLng(long_lat=point)
             self.coordinate_point_list.append(AngleUtil.get_vector(point_item, original_point))
 
     def draw_graph(self):
         self.fill_coordinate_point_list()
-        dcg = DrawCoordinateGraph(self.coordinate_point_list, (0,0,0))
+        dcg = DrawCoordinateGraph(self.coordinate_point_list, AngleUtil.get_vector(self.o_point, original_point))
         dcg.draw_graph()
 
 
