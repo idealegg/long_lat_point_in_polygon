@@ -6,7 +6,7 @@ from DrawCoordinateGraph.DrawCoordinateGraph import *
 import math
 
 original_point = MyLatLng(0, 0)
-fixed_parameter = 0.01
+fixed_parameter = 0.009
 
 
 class Poly:
@@ -31,12 +31,12 @@ class Poly:
     def fill_coordinate_point_list(self):
         for point in self.point_list:
             point_item = MyLatLng(long_lat=point)
-            self.coordinate_point_list.append(AngleUtil.get_vector(point_item, original_point))
+            self.coordinate_point_list.append(AngleUtil.get_coordinate(point_item))
 
     def draw_graph(self):
         self.fill_coordinate_point_list()
-        dcg = DrawCoordinateGraph(self.coordinate_point_list, AngleUtil.get_vector(self.o_point, original_point))
-        dcg.draw_graph()
+        dcg = DrawCoordinateGraph(self.coordinate_point_list, AngleUtil.get_coordinate(self.o_point))
+        dcg.draw_graph('line', has_x=True)
 
 
 if __name__ == '__main__':

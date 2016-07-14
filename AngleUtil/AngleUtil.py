@@ -3,7 +3,7 @@ import math
 import numpy
 Rc = 6378137
 Rj = 6356725
-point_list = []
+
 
 class MyLatLng:
     def __init__(self, longitude=0, latitude=0, long_lat="", mode=1):
@@ -116,11 +116,17 @@ class AngleUtil:
         return math.radians(AngleUtil.get_angle(point_a, point_b))
 
     @staticmethod
-    def get_vector(point_a, point_b):
-        dx = point_b.m_Rad_la*point_b.Ec - point_a.m_Rad_la*point_a.Ec
-        dy = (point_b.m_Rad_lo-point_a.m_Rad_lo)*point_a.Ed
-        dz = (point_b.m_Rad_la-point_a.m_Rad_la)*point_a.Ec
+    def get_coordinate(point):
+        dx = point.Ed * numpy.cos(point.m_Rad_lo)
+        dy = point.Ed * numpy.sin(point.m_Rad_lo)
+        dz = point.Ec * numpy.sin(point.m_Rad_la)
         return dx, dy, dz
+
+    @staticmethod
+    def get_vector(point_a, point_b):
+        dx1, dy1, dz1 = AngleUtil.get_coordinate(point_a)
+        dx2, dy2, dz2 = AngleUtil.get_coordinate(point_b)
+        return dx2-dx1, dy2-dy1, dz2-dz1
 
     @staticmethod
     def get_vector_radius(x_t, y_t):
