@@ -95,9 +95,18 @@ CX296    |  292401N1123904E    |
     CX170 = '273742N1133142E'
     CX171 = '274501N1141326E'
     CX296 = '292401N1123904E'
+
     plist = (CX128,CX296,CX15,CX16,CX171,CX170,CX130,CX169,CX168,CX167,CX166,CX165,CX161,CX162,CX163,CX164,CX128)
-    poly = Poly(plist)
-    result = poly.point_in_poly('281332N1142106E')
+
+    TYTY = '433232S1095432E'
+    RUWEN = '412144S0985954E'
+    KIL = '401111S1111111E'
+    P2345 = '321212S1324312E'
+
+    plist2 = (TYTY, RUWEN, KIL, P2345)
+    poly = Poly(plist2)
+    # result = poly.point_in_poly('281332N1142106E')
+    result = poly.point_in_poly(P2345)
     print result
     poly.draw_graph()
 
