@@ -42,3 +42,16 @@ Z = X ** 2 + Y ** 2
 ax.plot_surface(X, Y, Z, rstride=1,cstride =1, cmap =cm.coolwarm,\
                linewidth = 0,antialiased = False)
 plt.show()
+
+
+from matplotlib import cm
+fig = plt.figure()
+ax = fig.gca( projection='3d')
+X = [0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0]
+Y = [0, 1, 1, 0, 0, 0, 1, 1, 0, 0, 0]
+X, Y = np.meshgrid(X, Y)
+Z = [0, 0, 1, 1, 0, 0, 0, 1, 1, 0, 0]
+ax.legend()
+ax.plot_surface(X, Y, Z, rstride=1,cstride =1, cmap =cm.coolwarm,\
+               linewidth = 0,antialiased = False)
+plt.show()
