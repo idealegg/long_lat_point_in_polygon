@@ -153,6 +153,35 @@ def parseFDPVOL(file):
   return fdp_vol
 
 
+def parseCHARPOINT(file):
+  fd = open(file)
+  char_point = {'DEFINITIONS': {}}
+  cur_title = ""
+  for line in fd:
+    line = line.strip()
+    comment = line.find("--")
+    if comment != -1:
+      line = line[:comment]
+    if line:
+      res = re.match("/(\w+)/", line)
+      if res:
+        cur_title = res.group(1)
+      elif cur_title == "DEFINITIONS":
+        res = re.search(
+"^(\w+)\s*\|\s*(\w+)\s*\|\s*(\w+)\s*\|\s*(\w+)\s*\|\s*([\w\s]*)\s*\|\s*(\w+)\s*\|\s*(\w+)"
+          , line)
+        if res:
+          char_point['DEFINITIONS'][res.group(1)] = {}
+          char_point['DEFINITIONS'][res.group(1)]['Lat_Long'] = res.group(2)
+          char_point['DEFINITIONS'][res.group(1)]['Type'] = res.group(3)
+          char_point['DEFINITIONS'][res.group(1)]['Relevant_fix'] = res.group(4)
+          char_point['DEFINITIONS'][res.group(1)]['Airport_Id'] = res.group(5)
+          char_point['DEFINITIONS'][res.group(1)]['Pilot_display'] = res.group(6)
+          char_point['DEFINITIONS'][res.group(1)]['DTI'] = res.group(7)
+  fd.close()
+  return char_point
+
+
 def getlevel(layer, fdp_vol):
   layer1 = []
   res = re.match("(\d+)-(\d+)", layer)
@@ -202,10 +231,24 @@ def draw_sec(fdp_vol, secs, ax1):
     i = i + 1
 
 
+def draw_route(char_point, route, ax1, level):
+  X = []
+  Y = []
+  Z = []
+  for point in route:
+    p = Point(char_point['DEFINITIONS'][point]['Lat_Long'], "", True, level)
+    X.append(p.x)
+    Y.append(p.y)
+    Z.append(p.z)
+    ax1.text(p.x, p.y, p.z, point, color="y")
+  ax1.plot(X, Y, Z, linewidth=10)
+
+
 if __name__ == "__main__":
 #  print circle_distance(Point(116.0000, 36.79333), Point(115.6779, 36.66582)) #/ 1852
 #  print circle_distance(Point("351122N1243344E", "", True), Point("351122N1243344E", "", True))
   fdp_vol = parseFDPVOL('FDP_VOLUMES_DEFINITION.ASF')
+  char_point = parseCHARPOINT('CHARACTERISTIC_POINTS.ASF')
   #pprint.pprint(fdp_vol)
   fig = plt.figure()
   ax1 = fig.add_subplot(1,1,1, projection='3d')
@@ -232,5 +275,8 @@ if __name__ == "__main__":
   #ax1.plot_trisurf(X1, Y1, Z1, linewidth=0.2, antialiased=True, color="r")
   #X1, Y1, Z1 = getXYZ('TM1A01', fdp_vol)
   draw_sec(fdp_vol, ["SH03E", "SH03W", "SH5E", "SH5W", "SH15", "SH01N", "SH01S", "SH20N", "SH20S"], ax1)
+  draw_route(char_point, ['RKSI', 'PONIK', 'SADLI', 'LAMEN', 'AKARA', 'DUMET', 'IPRAG',
+                          'PUD', 'JTN', 'OLGAP', 'NXD', 'KAKIS', 'OBGIV', 'TOL', 'ELNEX',
+                          'SHR', 'P215', 'XUVGI', 'NF', 'P120', 'SAGON', 'PLT', 'MABAG'], ax1, 10393)
   #ax1.plot_surface(Y1, Z1, X1, rstride=1, cstride=1, cmap=cm.coolwarm, linewidth=0, antialiased=False)
   plt.show()
