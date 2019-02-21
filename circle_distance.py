@@ -299,18 +299,20 @@ def is_point_in_poly(p, poly):
   return flag
 
 
-def is_point_in_vol(fdp_vol, p, vol, centre):
+def is_point_in_vol(fdp_vol, p, vol, centre, plevel = 0):
   poly = []
+  level = getlevel(fdp_vol['VOLUME'][vol]['layer'], fdp_vol)
+  if plevel > level[1] or plevel < level[0]:
+    return False
   for point in fdp_vol['VOLUME'][vol]['point_list'][:-1]:
-    #level = getlevel(fdp_vol['VOLUME'][vol]['layer'], fdp_vol)
     p1 = Point(fdp_vol['POINTS'][point], "", True)
     poly.append(p1.get2Dxy(centre))
   return is_point_in_poly(p.get2Dxy(centre), poly)
 
 
-def is_point_in_fir(fdp_vol, p, fir, centre):
+def is_point_in_fir(fdp_vol, p, fir, centre, plevel=0):
   for vol in fdp_vol['FIR'][fir]['vol_list']:
-    if is_point_in_vol(fdp_vol, p, vol, centre):
+    if is_point_in_vol(fdp_vol, p, vol, centre, plevel):
       return True
   return False
 
