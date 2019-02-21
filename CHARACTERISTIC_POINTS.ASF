@@ -102,6 +102,17 @@
 --      HS 2.0  | 08,NOV 2016 | Y.Z.Y        /   ADD TA01N TA01S
 --      HS 2.0  | 18,MAY 2017 | Z.Z.P        /   ADD BEMTA PUKAD BIGIS NUPTI PAVTU ANAOG
 --      HS 2.0  | 06,JUN 2017 | Y.Z.Y        /   ADD ZSSR AIRPORT 
+--      HS 2.0  | 18,JUL 2017 | Y.Z.Y        /   ADD ZUZY AIRPORT 
+--      HS 2.0  | 16,AUG 2017 | Z.Z.P        /   ADD P456
+--      HS 2.0  | 27.SEP 2017 | Z.Z.P        /   MOD UXALO & KIKEG
+--      HS 2.0  | 27.SEP 2017 | Z.Z.P        /   ADD LCGRA LCGRB LCGRC LCGRD LCGRE LCGRF LJG1 LJG2 LJG3 LJG4 LJG5 LJG6 KHNRA
+--                                                   KHNRB KHNRC KHNRD KHNRE KHNRF WYSRA WYSRB WYSRC WYSRD WYSRE WYSRF
+--                                                   XLNRA XLNRB XLNRC XLNRD XLNRE XLNRF
+
+--      HS 2.0  / 22.DEC 2017 / Y.Z.Y        /   ADD KHN11 KHN12 KHN13 KHN14 KHN15 KHN16 NCH11 NCH12 NCH13 NCH14 NCH15 NCH16
+--                                                   TXN11 TXN12 TXN13 TXN14 TXN15 TXN16 FOR KHN NCH AND TXN HOLDING
+--      HS 2.0  / 19.JUL 2018 / Y.Z.Y        /   ADD MILITARY AIRPORTS
+
 ---------------------------------------------------------------------------------- 
 --  CREATION DATE :  17,SEP 2014
 --  BY            :  Sun Hao
@@ -117,8 +128,9 @@
 --    NEUP 1.0  | 30,MAR 2015 |      S.H     | ADD  ZGHZ
 --    NEUP 1.0  | 21,OCT 2015 |      Z.J     | ADD  TAP09
 --    NEUP 1.0  | 15,MAR 2016 |   Z.Z.P      | ADD TC20N TC20s
-
-
+--    NEUP 1.0  | 05,DEC 2017 |   S.Y.X      | ADD POINTS FOR MAP/HOLDING 
+--    NEUP 1.0  | 20,DEC 2017 |   Z.Z.P ZKJ      | ADD POINTS FOR MAP/HOLDING 
+--    NEUP 1.0  | 08,APR 2018 |   Z.Z.P ZKJ      | ADD POINTS FOR 6M503  20180408
 
 
 /DEFINITIONS/
@@ -126,6 +138,7 @@
 --Name | Lat/Long       |Type       |REL|AI|PIL|DTI |TFM| Comments 
 -- 1   | 2              | 3         | 4 | 5| 6 | 7  | 8 | 
 --
+
 ------points FOR MAP/HOIDING
 ------------------------------------------------------------------------------
 ------
@@ -200,7 +213,6 @@ RUG09   | 325247N1194906E | REPORT    | N |  | Y |  N |  |
 RUG10   | 324200N1195823E | REPORT    | N |  | Y |  N |  |
 
 
-
 --SHZ HOLDING R210 30NM
 SHZ21 | 290953N1203146E | REPORT    | Y |  | Y |  N |  |
 SHZ22 | 285747N1203148E | REPORT    | Y |  | Y |  N |  |
@@ -268,6 +280,26 @@ MAA04 | 313953N1181209E | REPORT    | Y |  | Y |  N |  |
 MAA05 | 313056N1192217E | REPORT    | Y |  | Y |  N |  |
 MAA06 | 324113N1190652E | REPORT    | Y |  | Y |  N |  |
 
+
+--------------FOR M503-----------------------
+
+LELIM   | 225624N1171842E | REPORT    | N |  | Y |  N |  |
+NUDPO   | 264500N1210412E | REPORT    | N |  | Y |  N |  |
+ALADU   | 241912N1180042E | REPORT    | N |  | Y |  N |  |
+
+--LAPUG   | 225942N1172248E | REPORT    | N |  | Y |  N |  |
+--KAMEX   | 230530N1173000E | REPORT    | N |  | Y |  N |  |
+--APAKA   | 235148N1182642E | REPORT    | N |  | Y |  N |  |
+--OBKEL   | 250000N1195300E | REPORT    | N |  | Y |  N |  |
+--PONEN   | 253730N1202400E | REPORT    | N |  | Y |  N |  |
+
+LAPU6	| 225942N1172248E | REPORT    | N |  | Y |  N |  |
+TOLA6	| 230530N1173000E | REPORT    | N |  | Y |  N |  |
+APAK6	| 235148N1182642E | REPORT    | N |  | Y |  N |  |
+OBKE6	| 250000N1195300E | REPORT    | N |  | Y |  N |  |
+PONE6	| 253730N1202400E | REPORT    | N |  | Y |  N |  |
+
+
 ---------------------20180408 NEW ---------------------------------
 
 WQ    | 250000N1192826E | VOR       | Y |  | Y |  N |  |  WUQIU
@@ -304,34 +336,6 @@ WUXI4	| 314634N1200000E | REPORT    | N |  | Y |  N |  |
 WUXI5	| 315500N1201147E | REPORT    | N |  | Y |  N |  |
 
 
---------------FOR HULANDATONGDAO-----------------------
-P396    | 343550N1083133E | REPORT    | N |  | Y |  N |  |
-P397    | 340312N1084040E | REPORT    | N |  | Y |  N |  |
-SUNUV   | 363146N1040645E | REPORT    | N |  | Y |  N |  |
-P398    | 341205N1095250E | REPORT    | N |  | Y |  N |  |
-P402    | 322112N1133818E | REPORT    | N |  | Y |  N |  |
-P403    | 323754N1130608E | REPORT    | N |  | Y |  N |  |
-P450    | 323812N1143318E | REPORT    | N |  | Y |  N |  |
-VILIX   | 411654N1241024E | REPORT    | N |  | Y |  N |  |
-
---------------FOR M503-----------------------
-
-LELIM   | 225624N1171842E | REPORT    | N |  | Y |  N |  |
-NUDPO   | 264500N1210412E | REPORT    | N |  | Y |  N |  |
-ALADU   | 241912N1180042E | REPORT    | N |  | Y |  N |  |
-
---LAPUG   | 225942N1172248E | REPORT    | N |  | Y |  N |  |
---KAMEX   | 230530N1173000E | REPORT    | N |  | Y |  N |  |
---APAKA   | 235148N1182642E | REPORT    | N |  | Y |  N |  |
---OBKEL   | 250000N1195300E | REPORT    | N |  | Y |  N |  |
---PONEN   | 253730N1202400E | REPORT    | N |  | Y |  N |  |
-
-LAPU6	| 225942N1172248E | REPORT    | N |  | Y |  N |  |
-TOLA6	| 230530N1173000E | REPORT    | N |  | Y |  N |  |
-APAK6	| 235148N1182642E | REPORT    | N |  | Y |  N |  |
-OBKE6	| 250000N1195300E | REPORT    | N |  | Y |  N |  |
-PONE6	| 253730N1202400E | REPORT    | N |  | Y |  N |  |
-
 --------------FOR MM503-----------------------
 
 LAPUG   | 230415N1171828E | REPORT	 | N |  | Y |  N |  |
@@ -341,8 +345,15 @@ APAKA   | 235623N1182221E | REPORT	 | N |  | Y |  N |  |
 OBKEL   | 250409N1194802E | REPORT	 | N |  | Y |  N |  |
 PONEN   | 254044N1201822E | REPORT	 | N |  | Y |  N |  |
 
-
-
+--------------FOR HULANDATONGDAO-----------------------
+P396    | 343550N1083133E | REPORT    | N |  | Y |  N |  |
+P397    | 340312N1084040E | REPORT    | N |  | Y |  N |  |
+SUNUV   | 363146N1040645E | REPORT    | N |  | Y |  N |  |
+P398    | 341205N1095250E | REPORT    | N |  | Y |  N |  |
+P402    | 322112N1133818E | REPORT    | N |  | Y |  N |  |
+P403    | 323754N1130608E | REPORT    | N |  | Y |  N |  |
+P450    | 323812N1143318E | REPORT    | N |  | Y |  N |  |
+VILIX   | 411654N1241024E | REPORT    | N |  | Y |  N |  |
 --------------TIAPEI-----------------------
 TINHO   | 242112N1220142E | REPORT    | N |  | Y |  N |  |
 AROMA   | 264318N1225118E | REPORT    | N |  | Y |  N |  |
@@ -584,13 +595,16 @@ JHS   | 304340N1174226E | VORDME    | N |  | Y |  N |  |
 
 JNJ   | 244812N1183542E | VORDME    | N |  | Y |  N |  | 
 JTN   | 310721N1212027E | VOR       | Y |  | Y |  N |  |  JIUTING, WB NDB
-KHN   | 282542N1155518E | VORDME    | Y |  | Y |  N |  |  
+KHN   | 282542N1155518E | VORDME    | Y |  | Y |  N |  | 
 KHNRA | 275056N1162736E | VORDME    | Y |  | Y |  N |  |
 KHNRB | 275843N1163804E | VORDME    | Y |  | Y |  N |  |
 KHNRC | 280501N1163207E | VORDME    | Y |  | Y |  N |  |
 KHNRD | 275708N1162142E | VORDME    | Y |  | Y |  N |  |
 KHNRE | 275358N1162442E | VORDME    | Y |  | Y |  N |  |
 KHNRF | 280152N1163503E | VORDME    | Y |  | Y |  N |  |
+
+
+ 
 KOW   | 255148N1144801E | VOR       | Y |  | Y |  N |  |  GANZHOU
 LCG   | 253906N1164406E | VORDME    | N |  | Y |  N |  |  LIANGCHENG
 LIG   | 273742N1133142E | VORDME    | N |  | Y |  N |  |  LILING
@@ -607,6 +621,8 @@ LJG3  | 261240N1184637E | VOR       | Y |  | Y |  N |  |  LianJiang
 LJG4  | 262032N1185651E | VOR       | Y |  | Y |  N |  |  LianJiang
 LJG5  | 262339N1185354E | VOR       | Y |  | Y |  N |  |  LianJiang
 LJG6  | 261551N1184340E | VOR       | Y |  | Y |  N |  |  LianJiang
+
+
 LNY   | 350300N1182454E | VORDME    | N | ZSLY | Y |  N |  | 
 LYG   | 343530N1185312E | VORDME    | Y |  | Y |  N |  |
 MKG   | 233542N1193812E | VORDME    | N |  | Y |  N |  | 
@@ -669,6 +685,9 @@ WYSRC | 271717N1182405E | VORDME    | N |  | Y |  N |  |
 WYSRD | 272323N1183551E | VORDME    | N |  | Y |  N |  |
 WYSRE | 272657N1183331E | VORDME    | N |  | Y |  N |  |
 WYSRF | 272050N1182144E | VORDME    | N |  | Y |  N |  |
+
+
+
 WYN   | 242055N1140647E | REPORT    | N |  | Y |  N |  | 
 XDX   | 355836N1201730E | VORDME    | Y |  | Y |  N |  | XUEJIADAO
 --XJT   | 355747N1201419E | VORDME    | Y |  | Y |  N |  | XUEJIADAO
@@ -679,6 +698,9 @@ XLNRC | 251010N1175608E | VORDME    | Y |  | Y |  N |  | XINGLIN
 XLNRD | 251755N1180622E | VORDME    | Y |  | Y |  N |  | XINGLIN
 XLNRE | 252104N1180327E | VORDME    | Y |  | Y |  N |  | XINGLIN
 XLNRF | 251321N1175312E | VORDME    | Y |  | Y |  N |  | XINGLIN
+
+
+
 XMN   | 243230N1180718E | VORDME    | N |  | Y |  N |  |  XIAMEN
 XUZ   | 340342N1173254E | VORDME    | Y |  | Y |  N |  |  XUZHOU
 YEU   | 292022N1200158E | VORDME    | N | ZSYW | Y |  N |  |  YIWU
@@ -710,11 +732,12 @@ AKAVO | 271537N1193321E | REPORT    | N |  | Y |  N |  |
 AKVAS | 293512N1272754E | REPORT    | N |  | Y |  N |  | 
 AKSIG | 323000N1183200E | REPORT    | N |  | Y |  N |  | 
 AGAVO | 371000N1240000E | REPORT    | N |  | Y |  N |  |   
---AGPUX | 321017N1192943E | REPORT    | N |  | Y |  N |  |  
+--AGPUX | 321017N1192943E  | REPORT    | N |  | Y |  N |  |  
 AGPUX | 321022N1192925E | REPORT    | N |  | Y |  N |  |  
 
 AKARA | 313000N1233000E | REPORT    | Y |  | Y |  N |  |   
 AKOMA | 344136N1144442E | REPORT    | Y |  | Y |  N |  | 
+AKBEP | 334543N1215125E | REPORT    | Y |  | Y |  N |  |
 UGAGO | 293730N1193906E | REPORT    | Y | ZSNJ ZSHC ZSAM ZSSS ZSPD| Y |  N |  |  
 --AKOTO | 293730N1193906E | REPORT    | Y | ZSNJ ZSHC ZSAM ZSSS ZSPD| Y |  N |  |  
 ALDAP | 313730N1222212E | REPORT    | Y | ZSWZ VHHH ZGGG ZGSZ ZSAM | Y |  N |  | 
@@ -726,6 +749,7 @@ ASAVA | 314848N1215306E | REPORT    | Y |  | Y |  N |  |
 ATRIP | 303648N1214700E | REPORT    | Y |  | Y |  N |  | 
 --20131009
 IGLIT | 303724N1214756E | REPORT    | Y |  | Y |  N |  |
+IVPIP | 344912N1232514E | REPORT    | Y |  | Y |  N |  |
 
 ATVIM | 335654N1171218E | REPORT    | Y |  | Y |  N |  |  OLD POINT: P223
 AZUKI | 322409N1273452E | REPORT    | Y |  | Y |  N |  | 
@@ -741,7 +765,7 @@ BOLOD | 293512N1250130E | REPORT    | N |  | Y |  N |  |
 --BAVIK | 302124N1214057E | REPORT    | Y |  | Y |  N |  | 
 BAVIK | 302200N1213754E | REPORT    | Y |  | Y |  N |  |
 BONGI | 310000N1223853E | REPORT    | Y |  | Y |  N |  | 
-BUNVA | 315736N1212548E | REPORT    | Y | ZGGG | Y |  N |  | 
+BUNVA | 315736N1212548E | REPORT    | Y | ZGGG | Y |  N |  |  JUST FOR QNH_MAP
 BUBDA | 255242N1132806E | REPORT    | N |  | Y |  N |  | 
 BULAN | 270530N1240000E | REPORT    | N |  | Y |  N |  |
 BUMKU | 320306N1183706E | REPORT    | N |  | Y |  N |  |
@@ -818,6 +842,7 @@ MADUK | 314306N1180618E | REPORT    | Y |  | Y |  N |  |
 MAKIB | 273906N1190612E | REPORT    | Y |  | Y |  N |  |
 MAKNO | 382748N1210854E | REPORT    | N |  | Y |  N |  |  
 MALKA | 224419N1170051E | REPORT    | N |  | Y |  N |  | 
+MASGU | 245202N1143806E | REPORT    | N |  | Y |  N |  | 
 MEBNA | 255106N1033418E | REPORT    | N |  | Y |  N |  |  
 --MEXUP | 340042N1180518E | REPORT    | Y | ZBAA ZSPD ZSHC ZSTJ ZSJN | Y |  N |  | OLD POINT:P46
 MEXUP | 340037N1180545E | REPORT    | Y | ZBAA ZSPD ZSHC ZSJN | Y |  N |  | OLD POINT:P46
@@ -869,7 +894,8 @@ POTET | 321648N1270224E | REPORT    | N |  | Y |  N |  |
 PUKAD | 275906N1120906E | REPORT    | N |  | Y |  N |  |
 REMAX | 282236N1153112E | REPORT    | N |  | Y |  N |  |
 RUGMI | 344236N1170754E | REPORT    | Y |  | Y |  N |  | 
-RUPOX | 270736N1201118E | REPORT    | Y |  | Y |  N |  | 
+RUPOX | 270736N1201118E | REPORT    | Y |  | Y |  N |  |
+RUMIB | 333304N1214346E | REPORT    | Y |  | Y |  N |  |
 SADEK | 230016N1235754E | REPORT    | N |  | Y |  N |  | 
 SADLI | 314948N1250000E | REPORT    | Y |  | Y |  N |  |   
 SAGUT | 350000N1204600E | REPORT    | Y |  | Y |  N |  |  
@@ -913,6 +939,7 @@ UVUPA | 315154N1215324E | REPORT    | Y |  | Y |  N |  |
 UDOXI | 315236N1214706E | REPORT    | Y |  | Y |  N |  | 
 UNTOP | 304400N1221636E | REPORT    | Y |  | Y |  N |  |
 --XEREN | 312000N1233242E | REPORT    | Y |  | Y |  N |  |
+VAVSO | 244506N1145801E | REPORT    | Y |  | Y |  N |  |
 VEMEX | 314742N1181804E | REPORT    | Y |  | Y |  N |  | 
 VENKU | 305706N1211930E | REPORT    | Y |  | Y |  N |  | YEXIE
 VIOLA | 271317N1225628E | REPORT    | Y |  | Y |  N |  | 
@@ -968,6 +995,7 @@ P21   | 251500N1180030E | REPORT    | N |  | Y |  N |  |
 P22   | 282636N1204148E | REPORT    | N | ZSSS ZSPD | Y |  N |  |
 P23   | 284130N1204318E | REPORT    | N | ZSSS ZSPD ZSNB ZSWZ ZSNT  | Y |  N |  |
 PAMVU | 284130N1204318E | REPORT    | N | ZSSS ZSPD ZSNB ZSWZ ZSNT  | Y |  N |  |
+
 P24   | 340818N1102718E | REPORT    | N |  | Y |  N |  |
 P25   | 285918N1172854E | REPORT    | Y | ZSSS ZSPD ZSHC ZSWZ ZSNB | Y |  N |  | 
 P26   | 385242N0905730E | REPORT    | N |  | Y |  N |  |
@@ -1124,6 +1152,8 @@ P165  | 292918N1101012E | REPORT    | N |  | Y |  N |  |
 P167  | 274654N1100412E | REPORT    | N |  | Y |  N |  |
 P168  | 260948N1091530E | REPORT    | N |  | Y |  N |  |
 --P169  | 252030N1185506E | REPORT    | N |  | Y |  N |  |
+P169  | 290830N1130406E | REPORT    | N |  | Y |  N |  |
+
 
 P170  | 262154N1061654E | REPORT    | N |  | Y |  N |  |
 P171  | 254242N1064454E | REPORT    | N |  | Y |  N |  |
@@ -1192,13 +1222,15 @@ P227  | 335000N1155600E | REPORT    | N |  | Y |  N |  |
 P228  | 280036N1201500E | REPORT    | Y |  | Y |  N |  |
 P229  | 273842N1045742E | REPORT    | N |  | Y |  N |  | 
 P230  | 295442N1170500E | REPORT    | Y |  | Y |  N |  | 
-P231  | 295336N1171218E | REPORT    | Y |  | Y |  N |  | 
+--======20171010=====---
+P179  | 295336N1171218E | REPORT    | Y |  | Y |  N |  | 
 P232  | 310018N0963724E | REPORT    | N |  | Y |  N |  |
 P233  | 320554N1081548E | REPORT    | Y |  | Y |  N |  |
 P234  | 315400N1093100E | REPORT    | Y |  | Y |  N |  | 
 P235  | 310430N1095300E | REPORT    | N |  | Y |  N |  | 
 P236  | 291000N1210400E | REPORT    | N |  | Y |  N |  |
 SUSMU | 291000N1210400E | REPORT    | N |  | Y |  N |  |
+
 P237  | 283724N1210648E | REPORT    | N |  | Y |  N |  |
 P238  | 413430N1211100E | REPORT    | N |  | Y |  N |  | 
 P239  | 373712N1010000E | REPORT    | N |  | Y |  N |  | 
@@ -1285,8 +1317,8 @@ P400  | 354430N1130306E | REPORT	| N |  | Y |  N |  |
 
 
 P401  | 350312N1153448E | REPORT	| N |  | Y |  N |  |
-P402  | 354730N1191436E | REPORT	| N |  | Y |  N |  |
-P403  | 355224N1194248E | REPORT	| N |  | Y |  N |  |
+--P402  | 354730N1191436E | REPORT	| N |  | Y |  N |  |
+--P403  | 355224N1194248E | REPORT	| N |  | Y |  N |  |
 P404  | 350000N1215312E | REPORT	| N |  | Y |  N |  |
 --P405  | 352218N1201612E | REPORT	| N |  | Y |  N |  |
 P406  | 350000N1201524E | REPORT	| N |  | Y |  N |  |
@@ -1301,6 +1333,9 @@ P451  | 270000N1172916E | REPORT	| N |  | Y |  N |  |
 P452  | 255704N1171200E | REPORT	| N |  | Y |  N |  |
 P453  | 265200N1175332E | REPORT	| N |  | Y |  N |  |
 P456  | 255240N1175950E | REPORT	| N |  | Y |  N |  |
+------------20180918 ZHT ---
+P461  | 382730N1122706E | REPORT	| N |  | Y |  N |  | 
+----------------
 P468  | 295937N1171234E | REPORT	| N |  | Y |  N |  | 
 P471  | 261930N1105954E | REPORT	| N |  | Y |  N |  | 
 P476  | 235136N1071530E | REPORT	| N |  | Y |  N |  |  A599 NEW POINT
@@ -1507,7 +1542,10 @@ DCH   | 303324N0970636E | VOR       | N |  | Y |  N |  |  BANGDA
 DDG   | 401536N1241718E | VORDME    | N |  | Y |  N |  |  DANDONG
 DHN   | 413830N1220700E | VORDME    | N |  | Y |  N |  |  DAHUSHAN
 DKO   | 401842N1070012E | VORDME    | N |  | Y |  N |  |  DENGKOU            
-DJT   | 253148N1033624E | VORDME    | N |  | Y |  N |  |              
+DJT   | 253148N1033624E | VORDME    | N |  | Y |  N |  |  
+-------20180918 BY ZHT  ------
+DXC   | 383518N1125554E | VORDME    | N |  | Y |  N |  |  XINZHOU  WUTAISHAN
+------------------         
 DYG   | 290624N1102618E | REPORT    | N |  | Y |  N |  | 
 DYN   | 373148N1184718E | VORDME    | N |  | Y |  N |  | 
 ENH   | 301730N1093554E | VORDME    | N |  | Y |  N |  |  
@@ -1990,6 +2028,7 @@ NIRON | 385304N1164338E | REPORT    | N |  | Y |  N |  |
 NIVUX | 260000N1000000E | REPORT    | N |  | Y |  N |  |
 NIXOM | 313915N1185919E | REPORT    | N |  | Y |  N |  |
 UPLEL | 313915N1185919E | REPORT    | N |  | Y |  N |  |
+
 NODAL | 400248N1231030E | REPORT    | N |  | Y |  N |  | 
 NODOG | 243424N1111742E | REPORT    | N |  | Y |  N |  | 
 NOKET | 220253N1011518E | REPORT    | N |  | Y |  N |  | 
@@ -1999,8 +2038,11 @@ NONIT | 384048N1135600E | REPORT    | N |  | Y |  N |  |  TAIYUAN LIJIAGOU
 NOPAG | 105154S1355230E | REPORT    | N |  | Y |  N |  | 
 NOPIK | 371854N1253930E | REPORT    | N |  | Y |  N |  | 
 NOPIN | 352648N1132818E | REPORT    | N |  | Y |  N |  | 
-NUBKI | 415848N1243554E | REPORT    | N |  | Y |  N |  | 
-NUKTI | 415300N0951400E | REPORT    | N |  | Y |  N |  |  
+NUBKI | 415848N1243554E | REPORT    | N |  | Y |  N |  |
+NUNDU | 382654N1211448E | REPORT    | N |  | Y |  N |  | 
+NUKTI | 415300N0951400E | REPORT    | N |  | Y |  N |  |
+
+OBDIS | 380554N1223900E | REPORT    | N |  | Y |  N |  | 
 OCEAN | 214843N1144848E | REPORT    | N |  | Y |  N |  |  
 OGOMO | 305106N1050012E | REPORT    | N |  | Y |  N |  |  
 OKADA | 013400N1123800E | REPORT    | N |  | Y |  N |  | 
@@ -2025,7 +2067,6 @@ OTABO | 442700N1235536E | REPORT    | N |  | Y |  N |  |
 
 --20150906 ADD DUDIT BY SL&SXY
 OVLOG | 234936N1075642E | REPORT    | N |  | Y |  N |  | 
--- 
 PABKI | 444354N1260330E | REPORT    | N |  | Y |  N |  |
 PADNO | 355048N1131736E | REPORT    | N |  | Y |  N |  | 
 PAMDA | 384812N1190342E | REPORT    | N |  | Y |  N |  |  
@@ -2425,6 +2466,66 @@ NCXC  | 253252N1143704E | AIRPORT_I | Y |  | N |  N |  |  XINCHENG
 --NC  | NE | AIRPORT_I | Y |  | N |  N |  |  
 ---2006-6-26 MIL airports in ZSCN area by S.H
 
+-----------MILITARY AIRPORTS---------------------------------
+NBZQ  | 295529N1213424E | AIRPORT_I | Y |  | N |  N |  |  NINGBOZUHANGQIAO 
+FJZZ  | 243341N1173921E | AIRPORT_I | Y |  | N |  N |  |  ZHANGZHOU 
+FJYX  | 260013N1191847E | AIRPORT_I | Y |  | N |  N |  |  YIXU 
+FJXP  | 265636N1200435E | AIRPORT_I | Y |  | N |  N |  |  XIAPU 
+FJHA  | 250306N1184900E | AIRPORT_I | Y |  | N |  N |  |  HUIAN
+FJLT  | 253455N1192806E | AIRPORT_I | Y |  | N |  N |  |  LONGTIAN
+JSRG  | 321526N1203007E | AIRPORT_I | Y |  | N |  N |  |  RUGAO
+JSMA  | 322243N1184751E | AIRPORT_I | Y |  | N |  N |  |  MAAN
+JSTS  | 315819N1185031E | AIRPORT_I | Y |  | N |  N |  |  TUSHAN
+JSGF  | 311700N1202317E | AIRPORT_I | Y |  | N |  N |  |  GUANGFU
+SHDC  | 311925N1212429E | AIRPORT_I | Y |  | N |  N |  |  DACHANG
+SHGD  | 312009N1213716E | AIRPORT_I | Y |  | N |  N |  |  GAODONG
+SHCM  | 314044N1213041E | AIRPORT_I | Y |  | N |  N |  |  CHONGMING
+ZJJQ  | 301958N1201422E | AIRPORT_I | Y |  | N |  N |  |  JIANQIAO
+ZJJX  | 304213N1204134E | AIRPORT_I | Y |  | N |  N |  |  JIAXING
+ZJCX  | 305807N1194345E | AIRPORT_I | Y |  | N |  N |  |  CHANGXING
+AHWH  | 312325N1182432E | AIRPORT_I | Y |  | N |  N |  |  WUHU
+AHFD  | 315439N1173934E | AIRPORT_I | Y |  | N |  N |  |  FEIDONG
+AHBB  | 325056N1171920E | AIRPORT_I | Y |  | N |  N |  |  BENGBU
+AHLA  | 313739N1161634E | AIRPORT_I | Y |  | N |  N |  |  LUAN
+SDLY  | 365743N1203525E | AIRPORT_I | Y |  | N |  N |  |  LAIYANG
+SDCK  | 360925N1202326E | AIRPORT_I | Y |  | N |  N |  |  CANGKOU
+SDJZ  | 361950N1200129E | AIRPORT_I | Y |  | N |  N |  |  JIAOXIAN
+SDZC  | 364836N1175330E | AIRPORT_I | Y |  | N |  N |  |  ZHOUCUN
+JXXT  | 282518N1155525E | AIRPORT_I | Y |  | N |  N |  |  XIANGTANG
+JXZS  | 280124N1153259E | AIRPORT_I | Y |  | N |  N |  |  ZHANGSHU
+JXJJ  | 292838N1154803E | AIRPORT_I | Y |  | N |  N |  |  JIUJIANG
+JXQY  | 283809N1155549E | AIRPORT_I | Y |  | N |  N |  |  QINGYUNPU
+BJXG  | 394529N1160732E | AIRPORT_I | Y |  | N |  N |  |  LIANGXIANG
+BJSH  | 400858N1161922E | AIRPORT_I | Y |  | N |  N |  |  SHAHE
+BJTX  | 394841N1164231E | AIRPORT_I | Y |  | N |  N |  |  TONGXIAN
+TJYV  | 392221N1170536E | AIRPORT_I | Y |  | N |  N |  |  YANGCUN
+HNKF  | 344516N1142021E | AIRPORT_I | Y |  | N |  N |  |  KAIFENG
+HNXX  | 350936N1141054E | AIRPORT_I | Y |  | N |  N |  |  XINXIANG
+HBDG  | 380504N1142600E | AIRPORT_I | Y |  | N |  N |  |  DAGUOCUN
+HBGC  | 373000N1160814E | AIRPORT_I | Y |  | N |  N |  |  GUCHENG
+HBBD  | 385325N1152143E | AIRPORT_I | Y |  | N |  N |  |  BAODING
+HBHK  | 355227N1141447E | AIRPORT_I | Y |  | N |  N |  |  HANKOU
+HBHP  | 310035N1141952E | AIRPORT_I | Y |  | N |  N |  |  HUANGPO
+HBJM  | 305810N1121223E | AIRPORT_I | Y |  | N |  N |  |  JINMEN
+HBDY  | 303313N1112924E | AIRPORT_I | Y |  | N |  N |  |  DANGYANG
+GSJQ  | 402356N0994652E | AIRPORT_I | Y |  | N |  N |  |  JIUQUAN
+SCDF  | 313451N1000154E | AIRPORT_I | Y |  | N |  N |  |  DAOFU
+SCTP  | 303630N1040130E | AIRPORT_I | Y |  | N |  N |  |  TAIPINGSI
+LNTC  | 421655N1185111E | AIRPORT_I | Y |  | N |  N |  |  TUCHENGZI
+LNXC  | 403522N1204113E | AIRPORT_I | Y |  | N |  N |  |  XINGCHENG
+LNSZ  | 401221N1202642E | AIRPORT_I | Y |  | N |  N |  |  SUIZHONG
+LNJC  | 391705N1214728E | AIRPORT_I | Y |  | N |  N |  |  JINCHUAN
+SXCG  | 330749N1071226E | AIRPORT_I | Y |  | N |  N |  |  CHENGGU
+SXWG  | 341609N1081715E | AIRPORT_I | Y |  | N |  N |  |  WUGONG
+SXYL  | 343419N1091430E | AIRPORT_I | Y |  | N |  N |  |  YANLIANG
+SXLT  | 342154N1091402E | AIRPORT_I | Y |  | N |  N |  |  LINTONG
+GDCC  | 231005N1132251E | AIRPORT_I | Y |  | N |  N |  |  CENCUN
+GDSX  | 212356N1101305E | AIRPORT_I | Y |  | N |  N |  |  SUIXI
+HNYX  | 165000N1122100E | AIRPORT_I | Y |  | N |  N |  |  YONGXINGDAO
+HNLS  | 182813N1095848E | AIRPORT_I | Y |  | N |  N |  |  LINGSHUI
+HNLD  | 184409N1091124E | AIRPORT_I | Y |  | N |  N |  |  LEDONG
+
+-----------MILITARY AIRPORTS-------------------------------------- 
 
 ZGBH  | 213223N1091736E | AIRPORT_I | Y |  | N |  N |  | 
 ZGCD  | 285508N1113824E | AIRPORT_I | Y |  | N |  N |  | 
@@ -2528,7 +2629,6 @@ RCYU  | 241553N1203714E | AIRPORT_I | Y |  | N |  N |  | DUMMY
 RCFN  | 241553N1203714E | AIRPORT_I | Y |  | N |  N |  | DUMMY
 RCKH  | 223431N1202102E | AIRPORT_I | Y |  | N |  N |  |
 
-
 --------------------------------------------------------------------------------------
 
 --DUMMY POINTS 
@@ -2577,12 +2677,9 @@ TA13W | 311154N1212006E |  DUMMY  |  N  |  |  N  | Y |  |  Sector tran FIX
 TA14H | 311154N1212006E |  DUMMY  |  N  |  |  N  | Y |  |  Sector tran fi
 TA14L | 311154N1212006E |  DUMMY  |  N  |  |  N  | Y |  |  Sector tran fi
 TAC15 | 311154N1212006E |  DUMMY  |  N  |  |  N  | Y |  |  Sector tran FIX
-TA16L | 311154N1212006E |  DUMMY  |  N  |  |  N  | Y |  |  Sector tran FIX
 TAC16 | 311154N1212006E |  DUMMY  |  N  |  |  N  | Y |  |  Sector tran FIX
 TAC36 | 311154N1212006E |  DUMMY  |  N  |  |  N  | Y |  |  Sector tran FIX
-TA16H | 311154N1212006E |  DUMMY  |  N  |  |  N  | Y |  |  Sector tran FIX
 TAC17 | 311154N1212006E |  DUMMY  |  N  |  |  N  | Y |  |  Sector tran FIX
-TAC18 | 311154N1212006E |  DUMMY  |  N  |  |  N  | Y |  |  Sector tran FIX
 TA18L | 311154N1212006E |  DUMMY  |  N  |  |  N  | Y |  |  Sector tran FIX
 TA18H | 311154N1212006E |  DUMMY  |  N  |  |  N  | Y |  |  Sector tran FIX
 TAC19 | 311154N1212006E |  DUMMY  |  N  |  |  N  | Y |  |  Sector tran FIX
@@ -2599,11 +2696,11 @@ TAC24 | 311154N1212006E |  DUMMY  |  N  |  |  N  | Y |  |  Sector tran FIX
 TAC25 | 311154N1212006E |  DUMMY  |  N  |  |  N  | Y |  |  Sector tran FIX
 TAC26 | 311154N1212006E |  DUMMY  |  N  |  |  N  | Y |  |  Sector tran FIX
 TAC27 | 311154N1212006E |  DUMMY  |  N  |  |  N  | Y |  |  Sector tran FIX
-TAC28 | 311154N1212006E |  DUMMY  |  N  |  |  N  | Y |  |  Sector tran FIX
 TA28L | 311154N1212006E |  DUMMY  |  N  |  |  N  | Y |  |  Sector tran FIX
 TA28H | 311154N1212006E |  DUMMY  |  N  |  |  N  | Y |  |  Sector tran FIX
 TAC29 | 311154N1212006E |  DUMMY  |  N  |  |  N  | Y |  |  Sector tran FIX
 TAC30 | 311154N1212006E |  DUMMY  |  N  |  |  N  | Y |  |  Sector tran FIX
+
 TAC31 | 311154N1212006E |  DUMMY  |  N  |  |  N  | Y |  |  Sector tran FIX
 TAC02 | 311154N1212006E |  DUMMY  |  N  |  |  N  | Y |  |  Sector tran FIX
 TAC03 | 311154N1212006E |  DUMMY  |  N  |  |  N  | Y |  |  Sector tran FIX
@@ -2613,7 +2710,6 @@ TAC35 | 311154N1212006E |  DUMMY  |  N  |  |  N  | Y |  |  Sector tran FIX
 TAC32 | 311154N1212006E |  DUMMY  |  N  |  |  N  | Y |  |  Sector tran FIX
 TAC14 | 311154N1212006E |  DUMMY  |  N  |  |  N  | Y |  |  Sector tran FIX
 TAC34 | 311154N1212006E |  DUMMY  |  N  |  |  N  | Y |  |  Sector tran FIX
-
 
 
 TCORC | 311154N1212006E |  DUMMY  |  N  |  |  N  | Y |  |  Sector tran FIX
@@ -2638,8 +2734,9 @@ THFTW  | 311154N1212006E |  DUMMY  |  N  |  |  N  | Y |  |  Sector tran FIX
 ----ADD TWO DUMMY POINT FOE HFE S0304 20140613--------
 THFC3  | 311154N1212006E |  DUMMY  |  N  |  |  N  | Y |  |  Sector tran FIX
 THFC4  | 311154N1212006E |  DUMMY  |  N  |  |  N  | Y |  |  Sector tran FIX
+-------------------------20170614----------------------------
 THFC5  | 311154N1212006E |  DUMMY  |  N  |  |  N  | Y |  |  Sector tran FIX
-
+------------------------------------------------
 
 THFCT | 311154N1212006E |  DUMMY  |  N  |  |  N  | Y |  |  Sector tran fix
 TJNCT | 311154N1212006E |  DUMMY  |  N  |  |  N  | Y |  |  Sector tran fix
@@ -2687,9 +2784,6 @@ TLOWD | 311154N1212006E |  DUMMY  |  N  |  |  N  | Y |  |  nrt trans fix
 TNBTW | 311154N1212006E |  DUMMY  |  N  |  |  N  | Y |  |  nrt trans fix
 TLINY | 311154N1212006E |  DUMMY  |  N  |  |  N  | Y |  |  nrt trans fix
 
--- For E-T
-TPDET | 311154N1212006E |  DUMMY  |  N  |  |  N  | Y |  |  E-T
-THQET | 311154N1212006E |  DUMMY  |  N  |  |  N  | Y |  |  E-T
  
 
 --DUMMY POINT BETWEEN NBG & SHZ IN W58 BY S.H 20071227  FOR  STAR NBG TO ZSPD 
@@ -3302,8 +3396,8 @@ HFF5 |313531N1171458E| NONE	  | N | ZSOF | N |  N |  |  ZSOF 32 STAR
 --add for the hefei new tower 20130528
 PEDNU   | 321118N1164342E | REPORT    | N |  | Y |  N |  |
 SEGPI   | 323200N1171600E | REPORT    | N |  | Y |  N |  |
-UXALO   | 314104N1170030E | REPORT    | N |  | Y |  N |  |
-KIKEG   | 313652N1170303E | REPORT    | N |  | Y |  N |  |
+UXALO   | 314106N1170030E | REPORT    | N |  | Y |  N |  |
+KIKEG   | 313654N1170306E | REPORT    | N |  | Y |  N |  |
 BIPIM   | 323356N1161057E | REPORT    | N |  | Y |  N |  |
 NOKUL   | 320948N1165125E | REPORT    | N |  | Y |  N |  |
 SUNBO   | 314727N1180515E | REPORT    | N |  | Y |  N |  |
@@ -3392,8 +3486,6 @@ DHB    | 304148N1135818E | NDB       | Y |  | Y |  N |  |  NEW HEBAOHU
 BIVIP  | 310744N1151649E | REPORT    | Y |  | Y |  N |  |  
 -----20161012 BY ZHT  FOR H124 ---------
 P339   | 333905N1122916E | NONE      | N |  | Y |  N |  |
-
-
 --CSJ TEMP 20171011 
 AVLOG  | 315900N1171727E | NONE      | N |  | Y |  N |  |
 IDBIN  | 294150N1184218E | NONE      | N |  | Y |  N |  |
@@ -3409,43 +3501,6 @@ P277   | 295231N1171935E | NONE      | N |  | Y |  N |  |
 VILID  | 313330N1171724E | NONE      | N |  | Y |  N |  |
 
 
-
---for test only begin
-STNA | 315852N1212255E | REPORT    | Y |  | Y |  N |  |
-STNB | 313445N1213717E |  REPORT    | Y |  | Y |  N |  |
-STSA | 304417N1215547E | REPORT    | Y |  | Y |  N |  |
-STSB | 301755N1220534E| REPORT    | Y |  | Y |  N |  |
-
-TRCT | 370919N1222202E | REPORT    | Y |  | Y |  N |  |
-TJNR | 365214N1171237E | REPORT    | Y |  | Y |  N |  |
-THQT | 311226N1212024E | REPORT    | Y |  | Y |  N |  |
-TGZR | 254842N1145255E | REPORT    | Y |  | Y |  N |  |
-TPY  | 311154N1212000E | REPORT    | Y |  | Y |  N |  |
-TLAE | 362504N1171247E | REPORT    | Y |  | Y |  N |  |
-
-ACTNA | 315350N1201039E | REPORT    | Y |  | Y |  N |  |
-ACTSA | 312729N1201050E | REPORT    | Y |  | Y |  N |  |
-ACTNB | 315411N1201808E | REPORT    | Y |  | Y |  N |  |
-ACTSB | 312737N1201830E | REPORT    | Y |  | Y |  N |  |
-ACTNC | 315403N1202612E | REPORT    | Y |  | Y |  N |  |
-ACTSC | 312742N1202612E | REPORT    | Y |  | Y |  N |  |
-ACTN2 | 315413N1205237E | REPORT    | Y |  | Y |  N |  |
-ACTS2 | 312757N1205236E | REPORT    | Y |  | Y |  N |  |
-ACTN3 | 314104N1205509E | REPORT    | Y |  | Y |  N |  |
-ACTS3 | 313852N1205504E | REPORT    | Y |  | Y |  N |  |
-ACTN4 | 314131N1220249E | REPORT    | Y |  | Y |  N |  |
-ACTS4 | 313907N1220238E | REPORT    | Y |  | Y |  N |  |
-ACTN5 | 315209N1221442E | REPORT    | Y |  | Y |  N |  |
-ACTS5 | 313041N1221421E | REPORT    | Y |  | Y |  N |  |
-ACTN6 | 314128N1222631E | REPORT    | Y |  | Y |  N |  |
-ACTS6 | 313908N1222630E | REPORT    | Y |  | Y |  N |  |
-ACTN7 | 314115N1225812E | REPORT    | Y |  | Y |  N |  |
-ACTS7 | 313903N1225806E | REPORT    | Y |  | Y |  N |  |
-
-
-
-
---for test only end
 /ZSSS/
 FEEDER_FIX | BONGI BUNVA DUMET EKIMU EMSAN IBEGI MATNU PIKAS POMOK RUXIL SASAN UDOXI
 MAN_AIRPORT | ZSPD
