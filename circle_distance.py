@@ -43,6 +43,13 @@ def angle(p1, p2):
   p2l = math.sqrt(p2.x*p2.x + p2.y*p2.y + p2.z * p2.z)
   return math.acos(tmp1/p1l/p2l)
 
+def angle_of_vectors(v1, v2):
+  c1 = (v1[0].x - v1[1].x, v1[0].y-v1[1].y, v1[0].z-v1[1].z)
+  c2 = (v2[0].x - v2[1].x, v2[0].y - v2[1].y, v2[0].z - v2[1].z)
+  tmc1 = c1[0]*c2[0] + c1[1]*c2[1] + c1[2] * c2[2]
+  c1l = math.sqrt(c1[0]*c1[0] + c1[1]*c1[1] + c1[2] * c1[2])
+  c2l = math.sqrt(c2[0]*c2[0] + c2[1]*c2[1] + c2[2] * c2[2])
+  return math.acos(tmc1 / c1l / c2l)
 
 def circle_distance(p1, p2):
   a1 = angle(p1,p2)
@@ -124,7 +131,7 @@ def parseFDPVOL(file):
           fdp_vol['LAYER'][res.group(1)]['min'] = last_layer
           last_layer = fdp_vol['LAYER'][res.group(1)]['max']
       elif cur_title == "VOLUME":
-        res = re.search("^(\w+)\s*\|\s*(\w+)\s*\|\s*([\w\s]+)", line)
+        res = re.search("^(\w+)\s*\|\s*([\w-]+)\s*\|\s*([\w\s]+)", line)
         if res:
           cur_vol = res.group(1)
           fdp_vol['VOLUME'][cur_vol] = {}
@@ -298,16 +305,47 @@ def is_point_in_poly(p, poly):
     i += 1
   return flag
 
+def points_in_a_line(p, line):
+  #ret = (p[0]-line[0][0]) * (line[0][1]-line[1][1]) - (p[1]-line[0][1]) *(line[0][0]-line[1][0])
+  #print "p (%f, %f) in line ((%f, %f), (%f, %f)): %f" %(p[0], p[1], line[0][0], line[0][1], line[1][0], line[1][1], ret)
+  #if ret < 0.000001:
+  #  return True
+  return False
+
+def is_point_in_arc_list(p, arc_list, centre):
+  for arc in arc_list:
+    p1 = Point(fdp_vol['ARCS'][arc]['centre'], "", True)
+    p2 = Point(fdp_vol['ARCS'][arc]['start'], "", True)
+    p3 = Point(fdp_vol['ARCS'][arc]['end'], "", True)
+    if p in [p1, p2, p3]:
+      return True
+    if points_in_a_line(p.get2Dxy(centre), (p2.get2Dxy(centre), p3.get2Dxy(centre))):
+      return True
+    poly = [p1.get2Dxy(centre), p2.get2Dxy(centre), p3.get2Dxy(centre)]
+    if is_point_in_poly(p.get2Dxy(centre), poly):
+      return False
+    a1 = angle_of_vectors((p1, p2), (p1, p3))
+    a2 = angle_of_vectors((p1, p2), (p1, p))
+    a3 = angle_of_vectors((p1, p), (p1, p3))
+    if a2 + a3 > a1 + 0.00001:
+      return False
+    return True
+
 
 def is_point_in_vol(fdp_vol, p, vol, centre, plevel = 0):
   poly = []
+  arc_list = []
   level = getlevel(fdp_vol['VOLUME'][vol]['layer'], fdp_vol)
-  if plevel > level[1] or plevel < level[0]:
+  if plevel and (plevel > level[1] or plevel < level[0]):
     return False
   for point in fdp_vol['VOLUME'][vol]['point_list'][:-1]:
-    p1 = Point(fdp_vol['POINTS'][point], "", True)
+    try:
+      p1 = Point(fdp_vol['POINTS'][point], "", True)
+    except KeyError:
+      arc_list.append(point)
+      continue
     poly.append(p1.get2Dxy(centre))
-  return is_point_in_poly(p.get2Dxy(centre), poly)
+  return is_point_in_poly(p.get2Dxy(centre), poly) or is_point_in_arc_list(p, arc_list, centre)
 
 
 def is_point_in_fir(fdp_vol, p, fir, centre, plevel=0):
@@ -317,82 +355,94 @@ def is_point_in_fir(fdp_vol, p, fir, centre, plevel=0):
   return False
 
 
-if __name__ == "__main__":
-  ps =[ (031.74, 0118.87, 129.54),
-  (031.75, 0118.87, 228.6),
-  (031.75, 0118.88, 312.42),
-  (031.75, 0118.88, 403.86),
-  (031.75, 0118.88, 411.48),
-  (031.75, 0118.89, 449.58),
-  (031.76, 0118.89, 518.16),
-  (031.76, 0118.90, 548.64),
-  (031.76, 0118.90, 571.5),
-  (031.76, 0118.90, 594.36),
-  (031.76, 0118.91, 678.18),
-  (031.77, 0118.91, 754.38),
-  (031.77, 0118.92, 822.96),
-  (031.77, 0118.92, 883.92),
-  (031.77, 0118.93, 990.6),
-  (031.78, 0118.93, 1043.94),
-  (031.78, 0118.94, 1104.9),
-  (031.78, 0118.94, 1158.24),
-  (031.79, 0118.95, 1272.54),
-  (031.79, 0118.95, 1341.12),
-  (031.80, 0118.95, 1402.08),
-  (031.80, 0118.96, 1539.24),
-  (031.81, 0118.96, 1623.06),
-  (031.81, 0118.95, 1691.64),
-  (031.82, 0118.95, 1760.22),
-  (031.82, 0118.95, 1760.22),
-  (031.82, 0118.95, 1897.38),
-  (031.82, 0118.95, 1897.38),
-  (031.83, 0118.95, 1973.58),
-  (031.83, 0118.94, 2042.16),
-  (031.84, 0118.94, 2171.7),
-  (031.84, 0118.93, 2255.52),
-  (031.84, 0118.93, 2324.1),
-  (031.85, 0118.93, 2385.06),
-  (031.85, 0118.92, 2506.98),
-  (031.86, 0118.92, 2590.8),
-  (031.86, 0118.92, 2651.76),
-  (031.87, 0118.91, 2712.72),
-  (031.87, 0118.91, 2804.16),
-  (031.87, 0118.90, 2865.12),
-  (031.88, 0118.90, 2926.08),
-  (031.88, 0118.90, 2956.56),
-  (031.89, 0118.89, 3017.52),
-  (031.89, 0118.89, 3048),
-  (031.90, 0118.88, 3078.48),
-  (031.90, 0118.88, 3108.96),
-  (031.91, 0118.87, 3200.4),
-  (031.98, 0118.73, 4785.36),
-  (031.98, 0118.72, 4876.8),
-  (031.98, 0118.71, 4968.24),
-  (031.98, 0118.71, 5090.16),
-  (031.98, 0118.70, 5204.46),
-  (031.98, 0118.69, 5273.04),
-  (031.98, 0118.68, 5364.48),
-  (031.98, 0118.68, 5440.68),
-  (031.98, 0118.67, 5509.26),
-  (031.98, 0118.66, 5562.6),
-  (031.98, 0118.66, 5646.42),
-  (031.98, 0118.65, 5707.38),
-  (031.98, 0118.64, 5768.34),
-  (031.98, 0118.63, 5821.68),
-  (031.98, 0118.63, 5882.64),
-  (031.98, 0118.53, 5996.94),
-  (031.98, 0118.49, 6004.56)]
+def is_point_in_sector(fdp_vol, p, sector, centre, plevel=0):
+  ret = False
+  for vol in fdp_vol['SECTOR'][sector]['vol_list']:
+    if is_point_in_vol(fdp_vol, p, vol, centre, plevel):
+      print "in vol: %s" % vol
+      ret = True
+  return ret
 
+
+if __name__ == "__main__":
+  ps =[ (34.51917, 113.8405, 494.4225),
+(34.56585, 113.8256, 12400.00),
+(34.66406, 113.7942, 16400.00),
+(34.75486, 113.7649, 19312.88),
+(34.77628, 113.7580, 20000.00),
+(34.86333, 113.7300, 22367.45),
+(35.02115, 113.6605, 26367.45),
+(35.19874, 113.5817, 30183.72),
+(35.19939, 113.5815, 30183.72),
+(35.44667, 113.4716, 30183.72),
+(35.61333, 113.3966, 30183.72),
+(35.62500, 113.3915, 30183.72),
+(35.84667, 113.2933, 30183.72),
+(35.86230, 113.2863, 30183.72)]
+
+  ps2 = [(34.51917, 113.8405, 494.4225),
+       (34.56546, 113.8257, 3139.677),
+       (34.58918, 113.8181, 4494.422),
+       (34.60084, 113.8144, 5000.000),
+       (34.69417, 113.7844, 8879.424),
+       (34.69706, 113.7834, 9000.000),
+       (34.72214, 113.7754, 10000.00),
+       (34.83007, 113.7406, 14000.00),
+       (34.86333, 113.7300, 15118.71),
+       (34.98415, 113.6768, 19118.71),
+       (34.99711, 113.6710, 19542.20),
+       (35.01116, 113.6649, 20000.00),
+       (35.15567, 113.6009, 24000.00),
+       (35.27691, 113.5471, 27000.00),
+       (35.42560, 113.4809, 30183.72),
+       (35.42625, 113.4807, 30183.72),
+       (35.44667, 113.4716, 30183.72),
+       (35.61333, 113.3966, 30183.72),
+       (35.62500, 113.3915, 30183.72),
+       (35.84667, 113.2933, 30183.72),
+       (35.86230, 113.2863, 30183.72),
+       (36.23861, 113.1177, 30183.72)
+       ]
   #  print circle_distance(Point(116.0000, 36.79333), Point(115.6779, 36.66582)) #/ 1852
 #  print circle_distance(Point("351122N1243344E", "", True), Point("351122N1243344E", "", True))
   fdp_vol = parseFDPVOL('FDP_VOLUMES_DEFINITION.ASF')
   char_point = parseCHARPOINT('CHARACTERISTIC_POINTS.ASF')
-  centre = Point('311200N1212000E', '', True)
+  #pprint.pprint(fdp_vol)
+  centre = Point('343107N1134958E', '', True)
+  sec_list = ['TW01', 'AP01', 'AP02', "AC01"]
+  i = 1
+  print "fix2"
   for p in ps:
-    print circle_distance(Point(p[1], p[0]), Point(char_point['DEFINITIONS']['ZSNJ']['Lat_Long'], "", True, 0))   / 1852
-    print is_point_in_fir(fdp_vol, Point(p[1], p[0]), 'NJAP', centre)
-  print circle_distance(Point(char_point['DEFINITIONS']['SUNBO']['Lat_Long'], "", True, 0), Point(char_point['DEFINITIONS']['ZSNJ']['Lat_Long'], "", True, 0)) / 1852
-  print is_point_in_fir(fdp_vol, Point(char_point['DEFINITIONS']['SUNBO']['Lat_Long'], "", True, 0), 'NJAP', centre)
+    for sec in sec_list:
+      in_sec = is_point_in_sector(fdp_vol, Point(p[1], p[0]), sec, centre, p[2] * 0.3048)
+      if in_sec:
+        print "%d: %.2fE, %.2fN [%.2f] is in %s" % (i, p[1], p[0], p[2] * 0.3048, sec)
+    i = i + 1
+  i = 1
+  print "\nfix1:"
+  for p in ps2:
+    for sec in sec_list:
+      in_sec = is_point_in_sector(fdp_vol, Point(p[1], p[0]), sec, centre, p[2] * 0.3048)
+      if in_sec:
+        print "%d: %.2fE, %.2fN [%.2f] is in %s" % (i, p[1], p[0], p[2] * 0.3048, sec)
+    i = i + 1
+  for p in [('ZHCC', 494.4225), ('DUBAG', 22367.45), ('NOPIN', 30183.72), ('TAMIX', 30183.72), ('PADNO', 30183.72), ('SQ', 30183.72),
+             ('DUBAG', 15118.71)]:
+    for sec in sec_list:
+      in_sec = is_point_in_sector(fdp_vol, Point(char_point['DEFINITIONS'][p[0]]['Lat_Long'], "", True, 0), sec, centre, p[1]*0.3048)
+      if in_sec:
+        print "%s [%f] is in %s" % ( p[0], p[1], sec)
+
+  t1 = ['INS01', 'AP13', 'INS05']
+  txs = [(34.75486    ,113.7649), (34.99711    ,113.6710 )]
+  p1 = []
+  for t in t1:
+    t2 = Point(fdp_vol['POINTS'][t], "", True, 0)
+    p1.append(t2.get2Dxy(centre))
+  for tx in txs:
+    tx2 = Point(tx[1], tx[0])
+    print "%.2fE, %.2fN is in: %s" % (tx[1], tx[0], is_point_in_poly(tx2.get2Dxy(centre), p1))
+
 else:
   fdp_vol = parseFDPVOL('FDP_VOLUMES_DEFINITION.ASF')
   char_point = parseCHARPOINT('CHARACTERISTIC_POINTS.ASF')
